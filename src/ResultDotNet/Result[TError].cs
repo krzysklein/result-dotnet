@@ -48,6 +48,14 @@ public class Result<TError>
     public static Result<TError> FromError(TError error) => new(error);
 
     /// <summary>
+    /// Creates a new <see cref="Result{TError}"/> instance representing an error from the specified error value.
+    /// </summary>
+    /// <remarks>This implicit conversion allows error values to be assigned directly to <see
+    /// cref="Result{TError}"/> variables, simplifying error handling scenarios.</remarks>
+    /// <param name="error">The error value to encapsulate in the <see cref="Result{TError}"/>.</param>
+    public static implicit operator Result<TError>(TError error) => FromError(error);
+
+    /// <summary>
     /// Gets the error value associated with the result.
     /// </summary>
     /// <remarks>

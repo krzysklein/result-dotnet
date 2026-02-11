@@ -47,35 +47,26 @@ public class ResultOfTValueTErrorTests
     }
 
     [Fact]
-    public void ResultOfTError_Success_CreatesSuccessResult()
+    public void ResultOfTValueTError_ImplicitConversion_Success_CreatesSuccessResult()
     {
-        // Act
-        var result = Result<string>.Success();
+        // Arrange
+        Result<string, int> result = "ok";
 
         // Assert
         Assert.True(result.IsSuccess);
         Assert.False(result.IsError);
+        Assert.Equal("ok", result.Value);
     }
 
     [Fact]
-    public void ResultOfTError_Error_CreatesErrorResult()
+    public void ResultOfTValueTError_ImplicitConversion_Error_CreatesErrorResult()
     {
-        // Act
-        var result = Result<string>.FromError("fail");
+        // Arrange
+        Result<string, int> result = 5;
 
         // Assert
         Assert.False(result.IsSuccess);
         Assert.True(result.IsError);
-        Assert.Equal("fail", result.Error);
-    }
-
-    [Fact]
-    public void ResultOfTError_Error_ThrowsOnSuccess()
-    {
-        // Arrange
-        var result = Result<string>.Success();
-
-        // Act & Assert
-        Assert.Throws<InvalidOperationException>(() => _ = result.Error);
+        Assert.Equal(5, result.Error);
     }
 }

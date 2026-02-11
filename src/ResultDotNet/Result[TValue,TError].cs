@@ -43,11 +43,29 @@ public class Result<TValue, TError>
     public static Result<TValue, TError> FromValue(TValue value) => new(value);
 
     /// <summary>
+    /// Converts a value of type <typeparamref name="TValue"/> to a <see cref="Result{TValue, TError}"/> representing a
+    /// successful result.
+    /// </summary>
+    /// <remarks>This implicit conversion allows a value of type <typeparamref name="TValue"/> to be used
+    /// directly where a <see cref="Result{TValue, TError}"/> is expected. The resulting <see cref="Result{TValue,
+    /// TError}"/> will indicate success and contain the provided value.</remarks>
+    /// <param name="value">The value to be wrapped in a successful <see cref="Result{TValue, TError}"/>.</param>
+    public static implicit operator Result<TValue, TError>(TValue value) => FromValue(value);
+
+    /// <summary>
     /// Creates a new error result containing the specified error value.
     /// </summary>
     /// <param name="error">The error value to associate with the result. Cannot be null if the error type does not allow null values.</param>
     /// <returns>A result instance representing an error, containing the provided error value.</returns>
     public static Result<TValue, TError> FromError(TError error) => new(error);
+
+    /// <summary>
+    /// Converts a value of type TError to a Result<TValue, TError> representing an error result.
+    /// </summary>
+    /// <remarks>This implicit conversion allows error values to be easily returned or assigned as
+    /// Result<TValue, TError> instances, simplifying error handling scenarios.</remarks>
+    /// <param name="error">The error value to be encapsulated in the Result object.</param>
+    public static implicit operator Result<TValue, TError>(TError error) => FromError(error);
 
     /// <summary>
     /// Gets the value contained in the result if the operation was successful.

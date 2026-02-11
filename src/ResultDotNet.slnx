@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="ResultDotNet.Tests/ResultDotNet.Tests.csproj" Id="6898c055-5690-4114-9109-c35cb771d432" />
+  <Project Path="ResultDotNet/ResultDotNet.csproj" Id="fbea4b53-d0b5-4487-aace-48e1a78c5a64" />
+</Solution>

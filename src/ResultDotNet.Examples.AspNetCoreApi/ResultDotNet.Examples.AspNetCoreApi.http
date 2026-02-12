@@ -1,0 +1,22 @@
+@ResultDotNet.Examples.AspNetCoreApi_HostAddress = http://localhost:5283
+
+# Default request to get the weather forecast for the next 5 days
+
+GET {{ResultDotNet.Examples.AspNetCoreApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
+
+# Request to get the weather forecast for the next 1 day
+
+GET {{ResultDotNet.Examples.AspNetCoreApi_HostAddress}}/weatherforecast/?numDays=1
+Accept: application/json
+
+###
+
+# Request to test the API's handling of invalid input (negative number of days)
+
+GET {{ResultDotNet.Examples.AspNetCoreApi_HostAddress}}/weatherforecast/?numDays=-1
+Accept: application/json
+
+###

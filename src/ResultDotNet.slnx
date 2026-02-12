@@ -1,4 +1,11 @@
 <Solution>
-  <Project Path="ResultDotNet.Tests/ResultDotNet.Tests.csproj" Id="6898c055-5690-4114-9109-c35cb771d432" />
+  <Folder Name="/Examples/">
+    <Project Path="ResultDotNet.Examples.AspNetCoreApi/ResultDotNet.Examples.AspNetCoreApi.csproj" Id="4dcf56fb-5fec-4f21-88a0-a0a6b1283489" />
+  </Folder>
+  <Folder Name="/Tests/">
+    <Project Path="ResultDotNet.AspNetCore.Tests/ResultDotNet.AspNetCore.Tests.csproj" Id="ab00eda3-f7d3-41c9-bbbe-da645a3276ef" />
+    <Project Path="ResultDotNet.Tests/ResultDotNet.Tests.csproj" Id="6898c055-5690-4114-9109-c35cb771d432" />
+  </Folder>
+  <Project Path="ResultDotNet.AspNetCore/ResultDotNet.AspNetCore.csproj" Id="d901a924-0c2e-4ff7-9808-279dbfa31fb1" />
   <Project Path="ResultDotNet/ResultDotNet.csproj" Id="fbea4b53-d0b5-4487-aace-48e1a78c5a64" />
 </Solution>

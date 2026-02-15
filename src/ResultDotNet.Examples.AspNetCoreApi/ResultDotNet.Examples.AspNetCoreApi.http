@@ -20,3 +20,10 @@ GET {{ResultDotNet.Examples.AspNetCoreApi_HostAddress}}/weatherforecast/?numDays
 Accept: application/json
 
 ###
+
+# Request to JokesApi
+
+GET {{ResultDotNet.Examples.AspNetCoreApi_HostAddress}}/jokes/
+Accept: application/json
+
+###

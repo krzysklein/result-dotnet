@@ -4,6 +4,14 @@
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <PackageId>KrzysKlein.$(AssemblyName)</PackageId>
+    <Title>Result Pattern in .NET</Title>
+    <Authors>krzys.klein</Authors>
+    <PackageProjectUrl>https://github.com/krzysklein/result-dotnet</PackageProjectUrl>
+    <Description>Implementation of a Result Pattern</Description>
+    <RepositoryUrl>https://github.com/krzysklein/result-dotnet</RepositoryUrl>
+    <PackageTags>result funtional railroad</PackageTags>
   </PropertyGroup>
 
 </Project>

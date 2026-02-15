@@ -12,14 +12,12 @@ public class ValidateController
     [HttpPost]
     public IActionResult Post(
         ValidateInputDto input,
-        IValidator<ValidateInputDto> validator)
-    {
-        return ValidateInput(input)
+        IValidator<ValidateInputDto> validator) 
+        => ValidateInput(input, validator)
             .ToActionResult();
 
-        Result<ProblemDetails> ValidateInput(ValidateInputDto input) 
-            => validator.Validate(input).ToResult();
-    }
+    private static Result<ProblemDetails> ValidateInput(ValidateInputDto input, IValidator<ValidateInputDto> validator) 
+        => validator.Validate(input).ToResult();
 
     public record ValidateInputDto(
         string Forename,

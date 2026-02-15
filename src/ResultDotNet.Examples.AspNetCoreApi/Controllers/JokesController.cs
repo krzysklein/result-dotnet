@@ -10,37 +10,35 @@ public class JokesController(
     : ControllerBase
 {
     [HttpGet]
-    public async Task<IActionResult> GetAsync(CancellationToken cancellationToken)
-    {
-        return await SampleDelayAsync(cancellationToken)
-            .BindAsync(() => GetJokesFromApi(cancellationToken))
+    public async Task<IActionResult> GetAsync(CancellationToken cancellationToken) 
+        => await SampleDelayAsync(cancellationToken)
+            .BindAsync(() => GetJokesFromApi(cancellationToken, httpClientFactory))
             .ToActionResultAsync();
 
-        async Task<Result<ProblemDetails>> SampleDelayAsync(CancellationToken cancellationToken)
+    private static async Task<Result<ProblemDetails>> SampleDelayAsync(CancellationToken cancellationToken)
+    {
+        try
         {
-            try 
-            {
-                await Task.Delay(5000, cancellationToken);
-                return Result<ProblemDetails>.Success();
-            }
-            catch (OperationCanceledException)
-            {
-                return Result<ProblemDetails>.FromError(new ProblemDetails
-                {
-                    Status = StatusCodes.Status499ClientClosedRequest,
-                    Title = "Request was cancelled."
-                });
-            }
+            await Task.Delay(5000, cancellationToken);
+            return Result<ProblemDetails>.Success();
         }
-
-        async Task<Result<List<JokeDto>, ProblemDetails>> GetJokesFromApi(CancellationToken cancellationToken)
+        catch (OperationCanceledException)
         {
-            using var httpClient = httpClientFactory.CreateClient();
-            httpClient.BaseAddress = new Uri("https://api.sampleapis.com");
-
-            var result = await httpClient.GetFromJsonAsync<List<JokeDto>>("jokes/goodJokes", cancellationToken);
-            return result!;
+            return Result<ProblemDetails>.FromError(new ProblemDetails
+            {
+                Status = StatusCodes.Status499ClientClosedRequest,
+                Title = "Request was cancelled."
+            });
         }
+    }
+
+    private static async Task<Result<List<JokeDto>, ProblemDetails>> GetJokesFromApi(CancellationToken cancellationToken, IHttpClientFactory httpClientFactory)
+    {
+        using var httpClient = httpClientFactory.CreateClient();
+        httpClient.BaseAddress = new Uri("https://api.sampleapis.com");
+
+        var result = await httpClient.GetFromJsonAsync<List<JokeDto>>("jokes/goodJokes", cancellationToken);
+        return result!;
     }
 
     public class JokeDto

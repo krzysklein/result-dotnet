@@ -27,3 +27,25 @@ GET {{ResultDotNet.Examples.AspNetCoreApi_HostAddress}}/jokes/
 Accept: application/json
 
 ###
+
+# Successfult request to ValidateApi
+
+POST {{ResultDotNet.Examples.AspNetCoreApi_HostAddress}}/validate/
+Content-Type: application/json
+{
+  "forename": "John",
+  "surname": "Doe",
+  "email": "john.doe@test.com",
+  "dateOfBirth": "1990-01-01"
+}
+
+###
+
+# Unsuccessful request to ValidateApi (missing all properties)
+
+POST {{ResultDotNet.Examples.AspNetCoreApi_HostAddress}}/validate/
+Content-Type: application/json
+{
+}
+
+###

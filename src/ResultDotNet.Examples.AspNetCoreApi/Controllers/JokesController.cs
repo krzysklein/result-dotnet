@@ -57,5 +57,4 @@ public class JokesController(
         [JsonPropertyName("punchline")]
         public string? Punchline { get; set; }
     }
-
 }

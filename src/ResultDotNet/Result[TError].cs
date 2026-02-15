@@ -23,11 +23,18 @@ public class Result<TError>
     /// </summary>
     public bool IsError => !IsSuccess;
 
+    /// <summary>
+    /// Initializes a new instance of the Result class that represents a successful operation.
+    /// </summary>
     private Result()
     {
         IsSuccess = true;
     }
 
+    /// <summary>
+    /// Initializes a new instance of the Result class that represents a failed operation with the specified error.
+    /// </summary>
+    /// <param name="error">The error value that describes the reason for the failure. Cannot be null if TError is a reference type.</param>
     private Result(TError error)
     {
         Error = error;
@@ -38,14 +45,16 @@ public class Result<TError>
     /// Creates a new successful result with no error information.
     /// </summary>
     /// <returns>A <see cref="Result{TError}"/> instance representing a successful outcome.</returns>
-    public static Result<TError> Success() => new();
+    public static Result<TError> Success() 
+        => new();
 
     /// <summary>
     /// Creates a new error result containing the specified error value.
     /// </summary>
     /// <param name="error">The error value to associate with the result. Cannot be null if the result type does not allow null errors.</param>
     /// <returns>A result instance representing an error with the provided error value.</returns>
-    public static Result<TError> FromError(TError error) => new(error);
+    public static Result<TError> FromError(TError error) 
+        => new(error);
 
     /// <summary>
     /// Creates a new <see cref="Result{TError}"/> instance representing an error from the specified error value.
@@ -53,7 +62,8 @@ public class Result<TError>
     /// <remarks>This implicit conversion allows error values to be assigned directly to <see
     /// cref="Result{TError}"/> variables, simplifying error handling scenarios.</remarks>
     /// <param name="error">The error value to encapsulate in the <see cref="Result{TError}"/>.</param>
-    public static implicit operator Result<TError>(TError error) => FromError(error);
+    public static implicit operator Result<TError>(TError error) 
+        => FromError(error);
 
     /// <summary>
     /// Gets the error value associated with the result.
@@ -62,13 +72,7 @@ public class Result<TError>
     /// Accessing this property is only valid when the result represents an error. If the result does
     /// not contain an error, an <see cref="InvalidOperationException"/> is thrown.
     /// </remarks>
-    public TError Error
-    {
-        get
-        {
-            if (!IsError)
-                throw new InvalidOperationException("Result does not contain an error value.");
-            return field!;
-        }
-    }
+    public TError Error => IsError
+        ? field!
+        : throw new InvalidOperationException("Result does not contain an error value.");
 }

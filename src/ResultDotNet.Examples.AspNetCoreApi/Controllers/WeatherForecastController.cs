@@ -16,7 +16,7 @@ public class WeatherForecastController
     public IActionResult Get(int numDays = 5) 
         => ValidateInput(numDays)
             .Bind(GenerateDayRange)
-            .Bind(MapToWeatherForecastDto)
+            .Map(MapToWeatherForecastDto)
             .ToActionResult();
 
     private static Result<int, ProblemDetails> ValidateInput(int numDays)
@@ -38,12 +38,11 @@ public class WeatherForecastController
         => Result<IEnumerable<int>, ProblemDetails>.FromValue(
             Enumerable.Range(1, numDays));
 
-    private static Result<IEnumerable<WeatherForecastDto>, ProblemDetails> MapToWeatherForecastDto(IEnumerable<int> days) 
-        => Result<IEnumerable<WeatherForecastDto>, ProblemDetails>.FromValue(
-            days.Select(index => new WeatherForecastDto
+    private static IEnumerable<WeatherForecastDto> MapToWeatherForecastDto(IEnumerable<int> days) 
+        => days.Select(index => new WeatherForecastDto
             {
                 Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
                 TemperatureC = Random.Shared.Next(-20, 55),
                 Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            }));
+            });
 }

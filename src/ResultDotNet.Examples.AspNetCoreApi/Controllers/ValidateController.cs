@@ -1,6 +1,5 @@
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
-using static ResultDotNet.Examples.AspNetCoreApi.Controllers.ValidateController;
 
 namespace ResultDotNet.Examples.AspNetCoreApi.Controllers;
 

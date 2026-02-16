@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ResultDotNet.Examples.AspNetCoreApi.Controllers;
 
+/// <summary>
+/// This controller demonstrates how to use FluentValidation to validate input data in an ASP.NET Core API.
+/// </summary>
 [ApiController]
 [Route("[controller]")]
 public class ValidateController

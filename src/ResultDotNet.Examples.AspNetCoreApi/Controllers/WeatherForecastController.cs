@@ -2,6 +2,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ResultDotNet.Examples.AspNetCoreApi.Controllers;
 
+/// <summary>
+/// This is a sample controller that demonstrates how to use the Result pattern 
+/// to handle input validation and error handling in an ASP.NET Core API. 
+/// </summary>
 [ApiController]
 [Route("[controller]")]
 public class WeatherForecastController 

@@ -3,6 +3,9 @@ using System.Text.Json.Serialization;
 
 namespace ResultDotNet.Examples.AspNetCoreApi.Controllers;
 
+/// <summary>
+/// This controller demonstrates how to use the Result pattern to handle asynchronous operations and error handling in an ASP.NET Core API.
+/// </summary>
 [ApiController]
 [Route("[controller]")]
 public class JokesController(

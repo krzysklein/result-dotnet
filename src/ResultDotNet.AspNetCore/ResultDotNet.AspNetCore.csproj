@@ -1,17 +1,35 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net10.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<PackageId>KrzysKlein.$(AssemblyName)</PackageId>
+		<Version>0.1.0</Version>
+		<Title>Result Pattern in .NET</Title>
+		<Authors>krzys.klein</Authors>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<PackageReadmeFile>README.md</PackageReadmeFile>
+		<PackageProjectUrl>https://github.com/krzysklein/result-dotnet</PackageProjectUrl>
+		<Description>Implementation of a Result Pattern - ASP.NET Core Extensions</Description>
+		<RepositoryUrl>https://github.com/krzysklein/result-dotnet</RepositoryUrl>
+		<PackageTags>result funtional railroad aspnet</PackageTags>
+	</PropertyGroup>
 
-  <ItemGroup>
-	<FrameworkReference Include="Microsoft.AspNetCore.App" />
-  </ItemGroup>
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\ResultDotNet\ResultDotNet.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\ResultDotNet\ResultDotNet.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="README.md">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
 
 </Project>

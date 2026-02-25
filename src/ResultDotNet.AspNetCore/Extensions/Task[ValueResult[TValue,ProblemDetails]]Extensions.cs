@@ -4,9 +4,9 @@ using System.Net;
 #pragma warning disable IDE0130 // Namespace does not match folder structure
 namespace ResultDotNet;
 
-public static class TaskOfResultOfTValueTErrorExtensions
+public static class TaskOfValueResultOfTValueProblemDetailsExtensions
 {
-    extension<TValue>(Task<Result<TValue, ProblemDetails>> result)
+    extension<TValue>(Task<ValueResult<TValue, ProblemDetails>> result)
     {
         /// <summary>
         /// Asynchronously converts the result to an <see cref="IActionResult"/> with the specified HTTP status code.

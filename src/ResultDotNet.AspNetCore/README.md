@@ -37,8 +37,8 @@ public async Task<IActionResult> MyAsyncAction()
 You can map errors to custom `ProblemDetails` or other response types using provided extension methods.
 
 ## API Overview
-- `ToActionResult()`: Converts a `Result` or `Result<TValue, TError>` to an `IActionResult`.
-- Extensions for handling `Task<Result<...>>` in async controller actions.
+- `ToActionResult()`: Converts a `Result<ProblemDetails>`, or `Result<TValue, ProblemDetails>`, or `ValueResult<ProblemDetails>` or `ValueResult<TValue, ProblemDetails>` to an `IActionResult`.
+- Extensions for handling `Task<Result<...>>` or `Task<ValueResult<...>>` in async controller actions.
 - Helpers for mapping errors to `ProblemDetails`.
 
 ## Examples

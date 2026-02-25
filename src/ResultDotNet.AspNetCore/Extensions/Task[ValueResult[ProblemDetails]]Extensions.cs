@@ -4,9 +4,9 @@ using System.Net;
 #pragma warning disable IDE0130 // Namespace does not match folder structure
 namespace ResultDotNet;
 
-public static class TaskOfResultOfTErrorExtensions
+public static class TaskOfValueResultOfProblemDetailsExtensions
 {
-    extension(Task<Result<ProblemDetails>> result)
+    extension(Task<ValueResult<ProblemDetails>> result)
     {
         /// <summary>
         /// Asynchronously converts the result to an ASP.NET Core IActionResult, using the specified HTTP status code

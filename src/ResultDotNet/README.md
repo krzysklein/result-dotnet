@@ -39,6 +39,19 @@ var output = result.Match(
 );
 ```
 
+## ValueResult
+
+Use `ValueResult` when you want to return a value along with the success or error state in a value type (struct).
+
+```csharp
+var success = ValueResult<string>.Success();
+var error = ValueResult<string>.FromError("Something went wrong");
+
+var valueResult = ValueResult<int, string>.FromValue(42);
+var errorResult = ValueResult<int, string>.FromError("Invalid value");
+```
+
+
 ## API Overview
 - `Bind`: Chains operations that return results, propagating errors.
 - `Map`: Transforms the value in a successful result.

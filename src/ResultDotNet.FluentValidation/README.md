@@ -29,7 +29,8 @@ var result = validator.Validate(model).ToResult()
 ```
 
 ## API Overview
-- `ToResult()`: Converts a `FluentValidation.Results.ValidationResult` to a `Result` or `Result<TError>`.
+- `ToResult()`: Converts a `FluentValidation.Results.ValidationResult` to a `Result<ProblemDetails>`.
+- `ToValueResult()`: Converts a `FluentValidation.Results.ValidationResult` to a `ValueResult<ProblemDetails>`.
 - Extension methods for integrating validation into functional result pipelines.
 
 ## Examples

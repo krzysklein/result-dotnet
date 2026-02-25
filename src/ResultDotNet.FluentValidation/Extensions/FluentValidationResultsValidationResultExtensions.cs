@@ -34,5 +34,32 @@ public static class FluentValidationResultsValidationResultExtensions
                     Title = title,
                     Detail = string.Join(errorSeparator, validationResult.Errors.Select(e => e.ErrorMessage))
                 });
+
+        /// <summary>
+        /// Converts the validation result to a ValueResult containing a ProblemDetails object if validation fails, or a
+        /// successful result if validation passes.
+        /// </summary>
+        /// <remarks>If validation fails, the returned ProblemDetails object includes all error messages
+        /// concatenated using the specified separator. The method is useful for converting validation outcomes into
+        /// standardized error responses suitable for HTTP APIs.</remarks>
+        /// <param name="statusCode">The HTTP status code to assign to the ProblemDetails object when validation fails. Defaults to 400 (Bad
+        /// Request).</param>
+        /// <param name="title">The title to use for the ProblemDetails object when validation fails. Defaults to "Validation failed.".</param>
+        /// <param name="errorSeparator">The separator string used to join multiple validation error messages in the ProblemDetails detail field.
+        /// Defaults to "; ".</param>
+        /// <returns>A ValueResult containing a ProblemDetails object with validation error details if validation fails;
+        /// otherwise, a successful ValueResult with no error.</returns>
+        public ValueResult<ProblemDetails> ToValueResult(
+            int statusCode = StatusCodes.Status400BadRequest,
+            string title = "Validation failed.",
+            string errorSeparator = "; ")
+            => validationResult.IsValid
+                ? ValueResult<ProblemDetails>.Success()
+                : ValueResult<ProblemDetails>.FromError(new ProblemDetails
+                {
+                    Status = statusCode,
+                    Title = title,
+                    Detail = string.Join(errorSeparator, validationResult.Errors.Select(e => e.ErrorMessage))
+                });
     }
 }

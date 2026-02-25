@@ -1,6 +1,7 @@
 <Solution>
   <Folder Name="/Examples/">
     <Project Path="ResultDotNet.Examples.AspNetCoreApi/ResultDotNet.Examples.AspNetCoreApi.csproj" Id="4dcf56fb-5fec-4f21-88a0-a0a6b1283489" />
+    <Project Path="ResultDotNet.Examples.Benchmark/ResultDotNet.Examples.Benchmark.csproj" Id="739e0211-686f-4567-8df8-a7dfb6f14a1e" />
   </Folder>
   <Folder Name="/Tests/">
     <Project Path="ResultDotNet.AspNetCore.Tests/ResultDotNet.AspNetCore.Tests.csproj" Id="ab00eda3-f7d3-41c9-bbbe-da645a3276ef" />

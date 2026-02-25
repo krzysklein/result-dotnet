@@ -14,21 +14,21 @@
 public class Result<TError>
 {
     /// <summary>
-    /// Gets a value indicating whether the operation completed successfully.
-    /// </summary>
-    public bool IsSuccess { get; }
-
-    /// <summary>
     /// Gets a value indicating whether the result represents an error condition.
     /// </summary>
-    public bool IsError => !IsSuccess;
+    public bool IsError { get; }
+
+    /// <summary>
+    /// Gets a value indicating whether the operation completed successfully.
+    /// </summary>
+    public bool IsSuccess => !IsError;
 
     /// <summary>
     /// Initializes a new instance of the Result class that represents a successful operation.
     /// </summary>
     private Result()
     {
-        IsSuccess = true;
+        IsError = false;
     }
 
     /// <summary>
@@ -38,7 +38,7 @@ public class Result<TError>
     private Result(TError error)
     {
         Error = error;
-        IsSuccess = false;
+        IsError = true;
     }
 
     /// <summary>

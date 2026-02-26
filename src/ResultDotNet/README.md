@@ -17,7 +17,8 @@ Add the package via NuGet:
 
 ### Creating Results
 ```csharp
-var success = Result<string>.Success();
+var success = Result.Success();
+var successOrError = Result<string>.Success();
 var error = Result<string>.FromError("Something went wrong");
 
 var valueResult = Result<int, string>.FromValue(42);
@@ -44,7 +45,8 @@ var output = result.Match(
 Use `ValueResult` when you want to return a value along with the success or error state in a value type (struct).
 
 ```csharp
-var success = ValueResult<string>.Success();
+var success = ValueResult.Success();
+var successOrError = ValueResult<string>.Success();
 var error = ValueResult<string>.FromError("Something went wrong");
 
 var valueResult = ValueResult<int, string>.FromValue(42);

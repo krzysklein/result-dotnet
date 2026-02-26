@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.2.2 - Bare Result and ValueResult types
+- `Result` and `ValueResult` (without value and/or error) types implemented
+
 ## 0.2.1 - ValueResult
 - `ValueResult<TError>` and `ValueResult<TValue, TError>` types implemented
 - Added benchmarks comparing `Result<>` and `ValueResult<>` types

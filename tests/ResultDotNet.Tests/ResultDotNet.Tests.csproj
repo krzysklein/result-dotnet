@@ -15,7 +15,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\ResultDotNet\ResultDotNet.csproj" />
+		<ProjectReference Include="..\..\src\ResultDotNet\ResultDotNet.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

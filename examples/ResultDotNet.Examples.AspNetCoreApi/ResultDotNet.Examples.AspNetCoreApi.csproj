@@ -11,9 +11,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\ResultDotNet.AspNetCore\ResultDotNet.AspNetCore.csproj" />
-		<ProjectReference Include="..\ResultDotNet.FluentValidation\ResultDotNet.FluentValidation.csproj" />
-		<ProjectReference Include="..\ResultDotNet\ResultDotNet.csproj" />
+		<ProjectReference Include="..\..\src\ResultDotNet.AspNetCore\ResultDotNet.AspNetCore.csproj" />
+		<ProjectReference Include="..\..\src\ResultDotNet.FluentValidation\ResultDotNet.FluentValidation.csproj" />
+		<ProjectReference Include="..\..\src\ResultDotNet\ResultDotNet.csproj" />
 	</ItemGroup>
 
 </Project>

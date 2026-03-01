@@ -14,6 +14,10 @@ Implementation of a Result Pattern in C#.
 - Avoids exception-based flow control
 - Easy integration into existing projects
 - Supports custom error types
+- Reference-type implementations `Result`, `Result<TError>` and `Result<TValue, TError>`
+- Value-type implementations `ValueResult`, `ValueResult<TError>` and `ValueResult<TValue, TError>`
+- `Bind`, `Map`, `Match` operations, and their `Async` counterparts
+- Extensions for ASP.NET Core and FluentValidations library
 
 ## Installation
 
@@ -41,16 +45,27 @@ var valueResult = Result<int, string>.FromValue(42);
 var errorResult = Result<int, string>.FromError("Invalid value");
 ```
 
-## Example
+## Examples
 
 ```csharp
 public Result<int, string> Divide(int numerator, int denominator)
 {
     if (denominator == 0)
-        return Result.FromError<int, string>("Division by zero.");
-    return Result.FromValue<int, string>(numerator / denominator);
+        return Result<int, string>.FromError("Division by zero.");
+    return Result<int, string>.FromValue(numerator / denominator);
 }
 ```
+or even simpler when value and error types are different:
+```csharp
+public Result<int, string> Divide(int numerator, int denominator)
+{
+    if (denominator == 0)
+        return "Division by zero.";
+    return numerator / denominator;
+}
+```
+
+See [Examples](https://github.com/krzysklein/result-dotnet/tree/main/examples) folder for more usage examples.
 
 ## Contributing
 

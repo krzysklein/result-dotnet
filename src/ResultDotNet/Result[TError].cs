@@ -24,6 +24,17 @@ public class Result<TError>
     public bool IsSuccess => !IsError;
 
     /// <summary>
+    /// Gets the error value associated with the result.
+    /// </summary>
+    /// <remarks>
+    /// Accessing this property is only valid when the result represents an error. If the result does
+    /// not contain an error, an <see cref="InvalidOperationException"/> is thrown.
+    /// </remarks>
+    public TError Error => IsError
+        ? field!
+        : throw new InvalidOperationException("Result does not contain an error value.");
+
+    /// <summary>
     /// Initializes a new instance of the Result class that represents a successful operation.
     /// </summary>
     private Result()
@@ -64,15 +75,4 @@ public class Result<TError>
     /// <param name="error">The error value to encapsulate in the <see cref="Result{TError}"/>.</param>
     public static implicit operator Result<TError>(TError error) 
         => FromError(error);
-
-    /// <summary>
-    /// Gets the error value associated with the result.
-    /// </summary>
-    /// <remarks>
-    /// Accessing this property is only valid when the result represents an error. If the result does
-    /// not contain an error, an <see cref="InvalidOperationException"/> is thrown.
-    /// </remarks>
-    public TError Error => IsError
-        ? field!
-        : throw new InvalidOperationException("Result does not contain an error value.");
 }

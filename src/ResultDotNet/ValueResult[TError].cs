@@ -21,6 +21,16 @@ public readonly struct ValueResult<TError>
     public bool IsSuccess => !IsError;
 
     /// <summary>
+    /// Gets the error value contained in the result.
+    /// </summary>
+    /// <remarks>Accessing this property when the result does not represent an error will throw an exception.
+    /// Use the IsError property to determine whether an error value is present before accessing this
+    /// property.</remarks>
+    public TError Error => IsError
+        ? field!
+        : throw new InvalidOperationException("ValueResult does not contain an error value.");
+
+    /// <summary>
     /// Initializes a new instance of the ValueResult struct with a default successful state.
     /// </summary>
     public ValueResult()
@@ -65,14 +75,4 @@ public readonly struct ValueResult<TError>
     /// <param name="error">The error value to encapsulate in the <see cref="ValueResult{TError}"/>.</param>
     public static implicit operator ValueResult<TError>(TError error) 
         => FromError(error);
-
-    /// <summary>
-    /// Gets the error value contained in the result.
-    /// </summary>
-    /// <remarks>Accessing this property when the result does not represent an error will throw an exception.
-    /// Use the IsError property to determine whether an error value is present before accessing this
-    /// property.</remarks>
-    public TError Error => IsError
-        ? field!
-        : throw new InvalidOperationException("ValueResult does not contain an error value.");
 }

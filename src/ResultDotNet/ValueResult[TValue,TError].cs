@@ -22,6 +22,26 @@ public readonly struct ValueResult<TValue, TError>
     public bool IsSuccess => !IsError;
 
     /// <summary>
+    /// Gets the error value contained in the result.
+    /// </summary>
+    /// <remarks>Accessing this property when the result does not represent an error will throw an exception.
+    /// Use the IsError property to determine whether an error value is present before accessing this
+    /// property.</remarks>
+    public TError Error => IsError
+        ? field!
+        : throw new InvalidOperationException("ValueResult does not contain an error value.");
+
+    /// <summary>
+    /// Gets the value contained in the result if the operation was successful.
+    /// </summary>
+    /// <remarks>Accessing this property when the result does not represent a successful operation will throw
+    /// an exception. Use the IsSuccess property to determine whether a value is available before accessing this
+    /// property.</remarks>
+    public TValue Value => IsSuccess
+        ? field!
+        : throw new InvalidOperationException("ValueResult does not contain a success value.");
+
+    /// <summary>
     /// Initializes a new instance of the ValueResult struct with a default successful state with the specified value.
     /// </summary>
     private ValueResult(TValue value)
@@ -71,24 +91,4 @@ public readonly struct ValueResult<TValue, TError>
     /// <param name="error">The error value to use for the result. Cannot be null if the error type is a reference type.</param>
     public static implicit operator ValueResult<TValue, TError>(TError error)
         => FromError(error);
-
-    /// <summary>
-    /// Gets the value contained in the result if the operation was successful.
-    /// </summary>
-    /// <remarks>Accessing this property when the result does not represent a successful operation will throw
-    /// an exception. Use the IsSuccess property to determine whether a value is available before accessing this
-    /// property.</remarks>
-    public TValue Value => IsSuccess
-        ? field!
-        : throw new InvalidOperationException("ValueResult does not contain a success value.");
-
-    /// <summary>
-    /// Gets the error value contained in the result.
-    /// </summary>
-    /// <remarks>Accessing this property when the result does not represent an error will throw an exception.
-    /// Use the IsError property to determine whether an error value is present before accessing this
-    /// property.</remarks>
-    public TError Error => IsError
-        ? field!
-        : throw new InvalidOperationException("ValueResult does not contain an error value.");
 }

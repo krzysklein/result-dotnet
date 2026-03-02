@@ -24,6 +24,28 @@ public class Result<TValue, TError>
     public bool IsSuccess => !IsError;
 
     /// <summary>
+    /// Gets the error value associated with the result when an error has occurred.
+    /// </summary>
+    /// <remarks>
+    /// Accessing this property is only valid when the result represents an error. Attempting to
+    /// retrieve the error value when no error is present will throw an exception.
+    /// </remarks>
+    public TError Error => IsError
+        ? field!
+        : throw new InvalidOperationException("Result does not contain an error value.");
+
+    /// <summary>
+    /// Gets the value contained in the result if the operation was successful.
+    /// </summary>
+    /// <remarks>
+    /// Accessing this property when the result represents a failure will throw an exception. Use the
+    /// <see cref="IsSuccess"/> property to check whether the result contains a value before accessing it.
+    /// </remarks>
+    public TValue Value => IsSuccess
+        ? field!
+        : throw new InvalidOperationException("Result does not contain a success value.");
+
+    /// <summary>
     /// Initializes a new instance of the Result class that represents a successful result with the specified value.
     /// </summary>
     /// <param name="value">The value to associate with the successful result.</param>
@@ -78,26 +100,4 @@ public class Result<TValue, TError>
     /// <param name="error">The error value to be encapsulated in the Result object.</param>
     public static implicit operator Result<TValue, TError>(TError error) 
         => FromError(error);
-
-    /// <summary>
-    /// Gets the value contained in the result if the operation was successful.
-    /// </summary>
-    /// <remarks>
-    /// Accessing this property when the result represents a failure will throw an exception. Use the
-    /// <see cref="IsSuccess"/> property to check whether the result contains a value before accessing it.
-    /// </remarks>
-    public TValue Value => IsSuccess
-        ? field!
-        : throw new InvalidOperationException("Result does not contain a success value.");
-
-    /// <summary>
-    /// Gets the error value associated with the result when an error has occurred.
-    /// </summary>
-    /// <remarks>
-    /// Accessing this property is only valid when the result represents an error. Attempting to
-    /// retrieve the error value when no error is present will throw an exception.
-    /// </remarks>
-    public TError Error => IsError
-        ? field!
-        : throw new InvalidOperationException("Result does not contain an error value.");
 }

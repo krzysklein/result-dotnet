@@ -3,13 +3,13 @@
 public class NullableExtensionsTests
 {
     [Fact]
-    public void ToResult_HasValue_ReturnsSuccess()
+    public void ConvertToResult_HasValue_ReturnsSuccess()
     {
         // Arrange
         int? nullable = 42;
 
         // Act
-        var result = nullable.ToResult();
+        var result = nullable.ConvertToResult();
 
         // Assert
         Assert.True(result.IsSuccess);
@@ -17,13 +17,13 @@ public class NullableExtensionsTests
     }
 
     [Fact]
-    public void ToResult_NoValue_ReturnsError()
+    public void ConvertToResult_NoValue_ReturnsError()
     {
         // Arrange
         int? nullable = null;
 
         // Act
-        var result = nullable.ToResult();
+        var result = nullable.ConvertToResult();
 
         // Assert
         Assert.True(result.IsError);
@@ -31,13 +31,13 @@ public class NullableExtensionsTests
     }
 
     [Fact]
-    public void ToResult_HasValue_WithErrorFactory_ReturnsSuccess()
+    public void ConvertToResult_HasValue_WithErrorFactory_ReturnsSuccess()
     {
         // Arrange
         int? nullable = 42;
 
         // Act
-        var result = nullable.ToResult(() => "Custom error message");
+        var result = nullable.ConvertToResult(() => "Custom error message");
 
         // Assert
         Assert.True(result.IsSuccess);
@@ -45,13 +45,13 @@ public class NullableExtensionsTests
     }
 
     [Fact]
-    public void ToResult_WithErrorFactory_NoValue_ReturnsCustomError()
+    public void ConvertToResult_WithErrorFactory_NoValue_ReturnsCustomError()
     {
         // Arrange
         int? nullable = null;
 
         // Act
-        var result = nullable.ToResult(() => "Custom error message");
+        var result = nullable.ConvertToResult(() => "Custom error message");
 
         // Assert
         Assert.True(result.IsError);
@@ -59,13 +59,13 @@ public class NullableExtensionsTests
     }
 
     [Fact]
-    public void ToValueResult_HasValue_ReturnsSuccess()
+    public void ConvertToValueResult_HasValue_ReturnsSuccess()
     {
         // Arrange
         int? nullable = 42;
 
         // Act
-        var result = nullable.ToValueResult();
+        var result = nullable.ConvertToValueResult();
 
         // Assert
         Assert.True(result.IsSuccess);
@@ -73,13 +73,13 @@ public class NullableExtensionsTests
     }
 
     [Fact]
-    public void ToValueResult_NoValue_ReturnsError()
+    public void ConvertToValueResult_NoValue_ReturnsError()
     {
         // Arrange
         int? nullable = null;
 
         // Act
-        var result = nullable.ToValueResult();
+        var result = nullable.ConvertToValueResult();
 
         // Assert
         Assert.True(result.IsError);
@@ -87,25 +87,25 @@ public class NullableExtensionsTests
     }
 
     [Fact]
-    public void ToValueResult_HasValue_WithErrorFactory_ReturnsSuccess()
+    public void ConvertToValueResult_HasValue_WithErrorFactory_ReturnsSuccess()
     {
         // Arrange
         int? nullable = 42;
         // Act
-        var result = nullable.ToValueResult(() => "Custom error message");
+        var result = nullable.ConvertToValueResult(() => "Custom error message");
         // Assert
         Assert.True(result.IsSuccess);
         Assert.Equal(42, result.Value);
     }
 
     [Fact]
-    public void ToValueResult_WithErrorFactory_NoValue_ReturnsCustomError()
+    public void ConvertToValueResult_WithErrorFactory_NoValue_ReturnsCustomError()
     {
         // Arrange
         int? nullable = null;
 
         // Act
-        var result = nullable.ToValueResult(() => "Custom error message");
+        var result = nullable.ConvertToValueResult(() => "Custom error message");
 
         // Assert
         Assert.True(result.IsError);

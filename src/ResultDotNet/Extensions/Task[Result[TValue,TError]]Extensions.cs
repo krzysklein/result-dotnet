@@ -84,6 +84,21 @@ public static class TaskOfResultOfTValueTErrorExtensions
             => await (await resultAsync).MapErrorAsync(mapAsyncFunc);
 
         /// <summary>
+        /// Asynchronously invokes the specified callback based on the result of the operation, executing either the
+        /// success or error handler.
+        /// </summary>
+        /// <remarks>Use this method to handle both success and error outcomes in an asynchronous
+        /// workflow. The appropriate callback is invoked depending on the result, allowing for customized handling of
+        /// each case.</remarks>
+        /// <param name="onSuccess">An action to execute if the operation completes successfully. The successful result is provided as a
+        /// parameter.</param>
+        /// <param name="onErrorAsync">A function to execute if the operation fails. The error is provided as a parameter, and the function returns
+        /// a task representing the asynchronous error handling.</param>
+        /// <returns>A task that represents the asynchronous match operation.</returns>
+        public async Task MatchAsync(Action<TValue> onSuccess, Func<TError, Task> onErrorAsync)
+            => await (await resultAsync).MatchAsync(onSuccess, onErrorAsync);
+
+        /// <summary>
         /// Asynchronously invokes the specified delegate based on whether the result represents a success or an error,
         /// returning a value of the specified type.
         /// </summary>
@@ -100,6 +115,20 @@ public static class TaskOfResultOfTValueTErrorExtensions
             => await (await resultAsync).MatchAsync(onSuccess, onErrorAsync);
 
         /// <summary>
+        /// Asynchronously handles the result of a match operation by invoking the specified callback for either a
+        /// successful value or an error.
+        /// </summary>
+        /// <remarks>This method awaits the completion of a prior asynchronous result and then dispatches
+        /// the appropriate callback based on whether the result is successful or contains an error.</remarks>
+        /// <param name="onSuccessAsync">A function to be called if the match operation succeeds. The function receives the successful value and
+        /// returns a Task representing the asynchronous operation to perform.</param>
+        /// <param name="onError">An action to be called if the match operation fails. The action receives the error information associated
+        /// with the failure.</param>
+        /// <returns>A Task that represents the asynchronous match handling operation.</returns>
+        public async Task MatchAsync(Func<TValue, Task> onSuccessAsync, Action<TError> onError)
+            => await (await resultAsync).MatchAsync(onSuccessAsync, onError);
+
+        /// <summary>
         /// Asynchronously invokes the specified delegate based on whether the result represents a success or an error.
         /// </summary>
         /// <remarks>If the result is successful, onSuccessAsync is invoked; otherwise, onError is
@@ -113,6 +142,19 @@ public static class TaskOfResultOfTValueTErrorExtensions
         /// onSuccessAsync or onError delegate, depending on the result state.</returns>
         public async Task<TResult> MatchAsync<TResult>(Func<TValue, Task<TResult>> onSuccessAsync, Func<TError, TResult> onError)
             => await (await resultAsync).MatchAsync(onSuccessAsync, onError);
+
+        /// <summary>
+        /// Asynchronously invokes the specified callback based on the outcome of the operation, calling either the
+        /// success or error handler.
+        /// </summary>
+        /// <remarks>This method awaits the result of an asynchronous operation and then invokes the
+        /// appropriate callback depending on whether the operation succeeded or failed.</remarks>
+        /// <param name="onSuccessAsync">A function to execute if the operation completes successfully. The function receives the successful result
+        /// as its argument.</param>
+        /// <param name="onErrorAsync">A function to execute if the operation fails. The function receives the error as its argument.</param>
+        /// <returns>A task that represents the asynchronous match operation.</returns>
+        public async Task MatchAsync(Func<TValue, Task> onSuccessAsync, Func<TError, Task> onErrorAsync)
+            => await (await resultAsync).MatchAsync(onSuccessAsync, onErrorAsync);
 
         /// <summary>
         /// Asynchronously invokes the specified delegate based on whether the result represents a success or an error.

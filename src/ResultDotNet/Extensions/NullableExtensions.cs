@@ -14,7 +14,7 @@ public static class NullableExtensions
         /// <remarks>If the nullable does not have a value, a failed result is returned with a default error message. This method is useful for
         /// integrating nullable types into result-based workflows, allowing for seamless error handling when dealing with potentially null values.</remarks>
         /// <returns>A Result containing the value of the nullable if it has one, or an error message if it does not.</returns>
-        public Result<TValue, string> ToResult()
+        public Result<TValue, string> ConvertToResult()
             => nullable.HasValue
                 ? Result<TValue, string>.FromValue(nullable.Value)
                 : Result<TValue, string>.FromError(ValueIsNullErrorMessage);
@@ -28,7 +28,7 @@ public static class NullableExtensions
         /// <typeparam name="TError">The type of the error to return if the nullable value is not present.</typeparam>
         /// <param name="errorFactory">A function that produces an error of type TError when the nullable value is absent.</param>
         /// <returns>A Result containing the value if present; otherwise, a Result containing the error produced by errorFactory.</returns>
-        public Result<TValue, TError> ToResult<TError>(Func<TError> errorFactory)
+        public Result<TValue, TError> ConvertToResult<TError>(Func<TError> errorFactory)
             => nullable.HasValue
                 ? Result<TValue, TError>.FromValue(nullable.Value)
                 : Result<TValue, TError>.FromError(errorFactory());
@@ -41,7 +41,7 @@ public static class NullableExtensions
         /// result in a ValueResult, which simplifies error handling and result processing in calling code.</remarks>
         /// <returns>A ValueResult containing the value of the nullable if it has a value; otherwise, a ValueResult containing an
         /// error message indicating that the value is null.</returns>
-        public ValueResult<TValue, string> ToValueResult()
+        public ValueResult<TValue, string> ConvertToValueResult()
             => nullable.HasValue
                 ? ValueResult<TValue, string>.FromValue(nullable.Value)
                 : ValueResult<TValue, string>.FromError(ValueIsNullErrorMessage);
@@ -57,7 +57,7 @@ public static class NullableExtensions
         /// <param name="errorFactory">A function that produces an error of type TError to be returned if the nullable value is not present.</param>
         /// <returns>A ValueResult containing the value if present; otherwise, a ValueResult containing the error produced by
         /// errorFactory.</returns>
-        public ValueResult<TValue, TError> ToValueResult<TError>(Func<TError> errorFactory)
+        public ValueResult<TValue, TError> ConvertToValueResult<TError>(Func<TError> errorFactory)
             => nullable.HasValue
                 ? ValueResult<TValue, TError>.FromValue(nullable.Value)
                 : ValueResult<TValue, TError>.FromError(errorFactory());

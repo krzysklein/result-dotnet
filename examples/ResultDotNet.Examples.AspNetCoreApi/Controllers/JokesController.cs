@@ -27,11 +27,11 @@ public class JokesController(
         }
         catch (OperationCanceledException)
         {
-            return Result<ProblemDetails>.FromError(new ProblemDetails
+            return new ProblemDetails
             {
                 Status = StatusCodes.Status499ClientClosedRequest,
                 Title = "Request was cancelled."
-            });
+            };
         }
     }
 

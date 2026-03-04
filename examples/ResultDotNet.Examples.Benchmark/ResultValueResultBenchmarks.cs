@@ -2,6 +2,7 @@ using BenchmarkDotNet.Attributes;
 
 namespace ResultDotNet.Examples.Benchmark;
 
+[MemoryDiagnoser]
 public class ResultValueResultBenchmarks
 {
 #pragma warning disable CA1822 // Mark members as static

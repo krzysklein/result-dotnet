@@ -1,7 +1,7 @@
 <Solution>
   <Folder Name="/Repository items/">
-    <File Path="../CHANGELOG.md" />
-    <File Path="../README.md" />
+    <File Path="CHANGELOG.md" />
+    <File Path="README.md" />
   </Folder>
   <Folder Name="/Source/">
     <Project Path="src/ResultDotNet.AspNetCore/ResultDotNet.AspNetCore.csproj" Id="d901a924-0c2e-4ff7-9808-279dbfa31fb1" />

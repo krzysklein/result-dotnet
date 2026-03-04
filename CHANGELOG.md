@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.3.0 - Nullable and Reference Type extensions
+- `ConvertToResult` and `ConvertToValueResult` extension methods for converting nullable and reference types to `Result`/`ValueResult`
+- Added `Match` methods without return value
+
 ## 0.2.2 - Bare Result and ValueResult types
 - `Result` and `ValueResult` (without value and/or error) types implemented
 

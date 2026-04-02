@@ -41,8 +41,7 @@ public static class ResultOfTErrorExtensions
         /// Invokes the specified asynchronous function if the current result is successful, and returns its result;
         /// otherwise, returns a result containing the current error.
         /// </summary>
-        /// <param name="bindAsyncFunc">A function that returns a task producing a result to bind to if the current result is successful. Cannot be
-        /// null.</param>
+        /// <param name="bindAsyncFunc">A function that returns a task producing a result to bind to if the current result is successful.</param>
         /// <returns>A task representing the asynchronous bind operation. If the current result is successful, the task completes
         /// with the result of the provided function; otherwise, it completes with a result containing the current
         /// error.</returns>
@@ -125,8 +124,7 @@ public static class ResultOfTErrorExtensions
         /// result is returned. If the result is not successful, the mapping function is invoked to produce the new
         /// error value.</remarks>
         /// <typeparam name="TError2">The type of the error value to map to if the result is not successful.</typeparam>
-        /// <param name="mapAsyncFunc">A function that takes the current error value and returns a task that produces the mapped error value.
-        /// Cannot be null.</param>
+        /// <param name="mapAsyncFunc">A function that takes the current error value and returns a task that produces the mapped error value.</param>
         /// <returns>A task that represents the asynchronous operation. The task result is a new result containing the mapped
         /// error if the original result was not successful; otherwise, a successful result.</returns>
         public async Task<Result<TError2>> MapErrorAsync<TError2>(Func<TError, Task<TError2>> mapAsyncFunc)
@@ -162,9 +160,8 @@ public static class ResultOfTErrorExtensions
         /// <remarks>Use this method to handle both success and error cases in a single expression,
         /// enabling functional-style result processing.</remarks>
         /// <typeparam name="TResult">The type of the value returned by the delegate functions.</typeparam>
-        /// <param name="onSuccess">A function to invoke and return its result if the result represents a success. Cannot be null.</param>
-        /// <param name="onError">A function to invoke with the error value and return its result if the result represents an error. Cannot be
-        /// null.</param>
+        /// <param name="onSuccess">A function to invoke and return its result if the result represents a success.</param>
+        /// <param name="onError">A function to invoke with the error value and return its result if the result represents an error.</param>
         /// <returns>The value returned by either the <paramref name="onSuccess"/> or <paramref name="onError"/> delegate,
         /// depending on the result state.</returns>
         public TResult Match<TResult>(Func<TResult> onSuccess, Func<TError, TResult> onError)
@@ -177,9 +174,8 @@ public static class ResultOfTErrorExtensions
         /// </summary>
         /// <remarks>Use this method to handle both success and error scenarios in an asynchronous manner.
         /// The appropriate callback is invoked depending on whether the operation succeeded or failed.</remarks>
-        /// <param name="onSuccess">The action to execute if the operation is successful. Cannot be null.</param>
-        /// <param name="onErrorAsync">A function that takes an error of type TError and returns a Task, executed if the operation fails. Cannot be
-        /// null.</param>
+        /// <param name="onSuccess">The action to execute if the operation is successful.</param>
+        /// <param name="onErrorAsync">A function that takes an error of type TError and returns a Task, executed if the operation fails.</param>
         /// <returns>A Task that represents the asynchronous operation.</returns>
         public async Task MatchAsync(Action onSuccess, Func<TError, Task> onErrorAsync)
         {
@@ -269,7 +265,6 @@ public static class ResultOfTErrorExtensions
             if (result.IsSuccess)
             {
                 await onSuccessAsync();
-
             }
             else
             {

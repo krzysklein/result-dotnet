@@ -21,7 +21,7 @@ public static class ValueTaskOfValueResultExtensions
         /// Asynchronously maps the error value of the result to a new error type using the specified mapping function.
         /// </summary>
         /// <typeparam name="TError">The type to which the error value will be mapped.</typeparam>
-        /// <param name="mapFunc">A function that provides the new error value to map to. Cannot be null.</param>
+        /// <param name="mapFunc">A function that provides the new error value to map to.</param>
         /// <returns>A ValueTask that represents the asynchronous operation. The result contains a ValueResult with the mapped
         /// error value if the original result is an error; otherwise, the original success value is preserved.</returns>
         public async ValueTask<ValueResult<TError>> MapErrorAsync<TError>(Func<TError> mapFunc)
@@ -75,9 +75,8 @@ public static class ValueTaskOfValueResultExtensions
         /// </summary>
         /// <remarks>Both callbacks should be non-blocking to avoid impacting performance. Awaiting this
         /// method ensures that the appropriate callback is executed based on the result of the operation.</remarks>
-        /// <param name="onSuccessAsync">A function that is called when the operation completes successfully. The function should return a ValueTask
-        /// and must not be null.</param>
-        /// <param name="onError">An action that is called if the operation fails. This action must not be null.</param>
+        /// <param name="onSuccessAsync">A function that is called when the operation completes successfully. The function returns a ValueTask.</param>
+        /// <param name="onError">An action that is called if the operation fails.</param>
         /// <returns>A ValueTask that represents the asynchronous matching operation.</returns>
         public async ValueTask MatchAsync(Func<ValueTask> onSuccessAsync, Action onError)
             => await (await resultAsync).MatchAsync(onSuccessAsync, onError);
@@ -87,8 +86,7 @@ public static class ValueTaskOfValueResultExtensions
         /// value.
         /// </summary>
         /// <remarks>If the result is successful, <paramref name="onSuccessAsync"/> is invoked
-        /// asynchronously; otherwise, <paramref name="onError"/> is invoked synchronously. Neither delegate should be
-        /// null.</remarks>
+        /// asynchronously; otherwise, <paramref name="onError"/> is invoked synchronously.</remarks>
         /// <typeparam name="TResult">The type of the value returned by the delegates.</typeparam>
         /// <param name="onSuccessAsync">A delegate to invoke asynchronously if the result represents a success. The delegate returns a value of type
         /// <typeparamref name="TResult"/>.</param>
@@ -119,7 +117,7 @@ public static class ValueTaskOfValueResultExtensions
         /// error, and returns the delegate's result.
         /// </summary>
         /// <remarks>The appropriate delegate is invoked based on the current state of the result. Only
-        /// one of the delegates will be called. Both delegates must not be null.</remarks>
+        /// one of the delegates will be called.</remarks>
         /// <typeparam name="TResult">The type of the value returned by the success or error delegate.</typeparam>
         /// <param name="onSuccessAsync">A delegate to invoke asynchronously if the result represents a success. The delegate returns a value of type
         /// TResult.</param>

@@ -24,7 +24,7 @@ public static class ValueResultExtensions
         /// current result.
         /// </summary>
         /// <param name="bindAsyncFunc">A function that returns a <see cref="ValueTask{ValueResult}"/> representing the asynchronous bind operation
-        /// to perform if the current result is successful. Cannot be null.</param>
+        /// to perform if the current result is successful.</param>
         /// <returns>A <see cref="ValueTask{ValueResult}"/> representing the result of the bind operation if the current result
         /// is successful; otherwise, the current result.</returns>
         public async ValueTask<ValueResult> BindAsync(Func<ValueTask<ValueResult>> bindAsyncFunc)
@@ -39,7 +39,7 @@ public static class ValueResultExtensions
         /// indicate success and contain no error value. If the current result is an error, the mapping function is
         /// invoked to produce the new error value.</remarks>
         /// <typeparam name="TError">The type of the error value to map to.</typeparam>
-        /// <param name="mapFunc">A function that provides the new error value if the result is not successful. Cannot be null.</param>
+        /// <param name="mapFunc">A function that provides the new error value if the result is not successful.</param>
         /// <returns>A ValueResult<TError> that represents success if the current result is successful; otherwise, a result
         /// containing the mapped error value.</returns>
         public ValueResult<TError> MapError<TError>(Func<TError> mapFunc)
@@ -70,8 +70,8 @@ public static class ValueResultExtensions
         /// <remarks>This method checks the state of the operation result and calls either the success or
         /// error callback accordingly. Use this method to handle both outcomes without directly inspecting the
         /// result.</remarks>
-        /// <param name="onSuccess">The action to execute if the operation result indicates success. Cannot be null.</param>
-        /// <param name="onError">The action to execute if the operation result indicates failure. Cannot be null.</param>
+        /// <param name="onSuccess">The action to execute if the operation result indicates success.</param>
+        /// <param name="onError">The action to execute if the operation result indicates failure.</param>
         public void Match(Action onSuccess, Action onError)
         {
             if (result.IsSuccess)
@@ -89,11 +89,10 @@ public static class ValueResultExtensions
         /// corresponding value.
         /// </summary>
         /// <remarks>This method enables functional-style handling of success and error cases by allowing
-        /// the caller to provide separate logic for each outcome. Both delegates must be provided; otherwise, an
-        /// exception may be thrown at runtime.</remarks>
+        /// the caller to provide separate logic for each outcome.</remarks>
         /// <typeparam name="TResult">The type of the value returned by the delegates.</typeparam>
-        /// <param name="onSuccess">A delegate to invoke and return its result if the underlying result is successful. Cannot be null.</param>
-        /// <param name="onError">A delegate to invoke and return its result if the underlying result represents an error. Cannot be null.</param>
+        /// <param name="onSuccess">A delegate to invoke and return its result if the underlying result is successful.</param>
+        /// <param name="onError">A delegate to invoke and return its result if the underlying result represents an error.</param>
         /// <returns>The value returned by either the <paramref name="onSuccess"/> or <paramref name="onError"/> delegate,
         /// depending on the state of the result.</returns>
         public TResult Match<TResult>(Func<TResult> onSuccess, Func<TResult> onError)
@@ -107,8 +106,8 @@ public static class ValueResultExtensions
         /// </summary>
         /// <remarks>Use this method to conditionally perform actions based on the success or failure of
         /// an operation, supporting asynchronous error handling scenarios.</remarks>
-        /// <param name="onSuccess">The action to execute when the operation completes successfully. Cannot be null.</param>
-        /// <param name="onErrorAsync">A function that returns a ValueTask to execute if the operation fails. Cannot be null.</param>
+        /// <param name="onSuccess">The action to execute when the operation completes successfully.</param>
+        /// <param name="onErrorAsync">A function that returns a ValueTask to execute if the operation fails.</param>
         /// <returns>A ValueTask that represents the asynchronous execution of the error handling function if the operation
         /// fails, or the completion of the success action if the operation succeeds.</returns>
         public async ValueTask MatchAsync(Action onSuccess, Func<ValueTask> onErrorAsync)
@@ -121,7 +120,6 @@ public static class ValueResultExtensions
             {
                 await onErrorAsync();
             }
-
         }
 
         /// <summary>
@@ -195,7 +193,6 @@ public static class ValueResultExtensions
             if (result.IsSuccess)
             {
                 await onSuccessAsync();
-
             }
             else
             {

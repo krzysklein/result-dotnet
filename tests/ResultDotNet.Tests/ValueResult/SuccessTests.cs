@@ -1,9 +1,10 @@
-﻿namespace ResultDotNet.Tests;
+﻿namespace ResultDotNet.Tests.ValueResult;
+using ValueResult = ResultDotNet.ValueResult;
 
-public class ValueResultTests
+public class SuccessTests
 {
     [Fact]
-    public void ValueResult_default_CreatesSuccessResult()
+    public void ValueResult_Default_CreatesSuccessResult()
     {
         // Act
         ValueResult result = default;
@@ -22,16 +23,5 @@ public class ValueResultTests
         // Assert
         Assert.True(result.IsSuccess);
         Assert.False(result.IsError);
-    }
-
-    [Fact]
-    public void ValueResult_Error_CreatesErrorResult()
-    {
-        // Act
-        var result = ValueResult.Error();
-
-        // Assert
-        Assert.False(result.IsSuccess);
-        Assert.True(result.IsError);
     }
 }

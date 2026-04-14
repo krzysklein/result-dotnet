@@ -1,5 +1,6 @@
 <Solution>
   <Folder Name="/Repository items/">
+    <File Path=".editorconfig" />
     <File Path="CHANGELOG.md" />
     <File Path="README.md" />
   </Folder>
